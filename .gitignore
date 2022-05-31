@@ -24,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 bin/*
 package-lock.json
+src/contracts/*
+.gitignore

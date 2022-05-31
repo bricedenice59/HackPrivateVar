@@ -17,10 +17,15 @@
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
-require('dotenv').config();
+const dotenv = require('dotenv');
+const dotenvExpand = require('dotenv-expand');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
+var myEnv = dotenv.config();
+dotenvExpand.expand(myEnv);
+
 module.exports = {
+  contracts_build_directory: "./src/contracts",
   /**
    * Networks define how you connect to your ethereum client and let you set the
    * defaults web3 uses to send transactions. If you don't specify one truffle
@@ -47,7 +52,7 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           process.env.MNEMONIC,
-          `wss://rinkeby.infura.io/ws/v3/${process.env.INFURA_PROJECT_ID}`
+          process.env.INFURA_WS_NETWORK
         ),
       websocket: true,
       network_id: 4, // Rinkeby's id
